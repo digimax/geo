@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+      xmlns:p="tapestry:parameter">
+    <t:content>
+
+        <t:outputraw value="fsScript"/>
+        <t:outputraw value="vsScript"/>
+
+        <script type="text/javascript" src="${context:js/globe/earth.js}"></script>
+        <!--<t:outputraw value="globeScript"/>-->
+        <canvas id="globe-canvas" style="border: none;" width="200" height="200"></canvas><br />
+
+        <input type="checkbox" id="color-map" checked="true" /> Use color map<br/>
+        <input type="checkbox" id="specular-map" checked="true" /> Use specular map<br/>
+        <input type="checkbox" id="lighting" checked="true" /> Use lighting<br/>
+
+        <h2>Point light:</h2>
+
+        <table style="border: 0; padding: 10px;">
+            <tr>
+                <td><b>Location:</b></td>
+                <td>X: <input type="text" id="lightPositionX" value="-10.0" /></td>
+                <td>Y: <input type="text" id="lightPositionY" value="4.0" /></td>
+                <td>Z: <input type="text" id="lightPositionZ" value="-20.0" /></td>
+            </tr>
+            <tr>
+                <td><b>Specular colour:</b></td>
+                <td>R: <input type="text" id="specularR" value="5.0" /></td>
+                <td>G: <input type="text" id="specularG" value="5.0" /></td>
+                <td>B: <input type="text" id="specularB" value="5.0" /></td>
+            </tr>
+            <tr>
+                <td><b>Diffuse colour:</b></td>
+                <td>R: <input type="text" id="diffuseR" value="0.8" /></td>
+                <td>G: <input type="text" id="diffuseG" value="0.8" /></td>
+                <td>B: <input type="text" id="diffuseB" value="0.8" /></td>
+            </tr>
+        </table>
+
+        <h2>Ambient light:</h2>
+
+        <table style="border: 0; padding: 10px;">
+            <tr>
+                <td><b>Colour:</b></td>
+                <td>R: <input type="text" id="ambientR" value="0.8" /></td>
+                <td>G: <input type="text" id="ambientG" value="0.8" /></td>
+                <td>B: <input type="text" id="ambientB" value="0.8" /></td>
+            </tr>
+        </table>
+        <br/>
+
+        Earth texture courtesy of <a href="http://www.esa.int/esaEO/SEMGSY2IU7E_index_0.html">the European Space Agency/Envisat</a>.<br/>
+        <br/>
+    </t:content>
+</html>

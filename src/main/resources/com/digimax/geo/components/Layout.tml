@@ -5,11 +5,9 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"/>
         <title>${title}</title>
-        <script type="text/javascript" src="///learningwebgl.com/lessons/lesson15/glMatrix-0.9.5.min.js"></script>
-        <script type="text/javascript" src="///learningwebgl.com/lessons/lesson15/webgl-utils.js"></script>
-        <t:outputraw value="globeScript"/>
+        <script src="///learningwebgl.com/lessons/lesson15/glMatrix-0.9.5.min.js"></script>
+        <script src="///learningwebgl.com/lessons/lesson15/webgl-utils.js"></script>
     </head>
-
     <body onload="webGLStart();">
         <!-- start header -->
         <div class="header">
