@@ -67,11 +67,11 @@ public class LocationServiceImpl implements LocationService {
             location.isp = isp;
             return location;
         } catch (UnknownHostException e) {
-            e.printStackTrace();
+            logger.debug("ERROR", e);
         } catch (GeoIp2Exception e) {
-            e.printStackTrace();
+            logger.debug("ERROR", e);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.debug("ERROR", e);
         }
         return null;
     }
