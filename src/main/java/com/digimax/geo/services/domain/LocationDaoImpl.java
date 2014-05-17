@@ -4,21 +4,17 @@ import com.digimax.geo.entities.Location;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Restrictions;
 
 import java.util.*;
 
 /**
  * Created by jonwilliams on 2014-05-16.
  */
+@SuppressWarnings("unchecked")
 public class LocationDaoImpl implements LocationDao {
 
     @Inject
     private Session session;
-
-    @Inject
-    private DomainObjectService domainObjectService;
 
     @Override
     public List<Location> getAll() {

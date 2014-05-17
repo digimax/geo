@@ -41,8 +41,6 @@ public class Location extends DomainObject {
     @Property
     public String continentCode;
 
-
-
     @Property
     @NonVisual
     public String postCode;
