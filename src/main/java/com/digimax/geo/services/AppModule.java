@@ -1,19 +1,26 @@
 package com.digimax.geo.services;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.digimax.geo.services.app.GeoDatabaseReader;
+import com.digimax.geo.services.app.WebRefresher;
 import com.digimax.geo.services.domain.LocationService;
 import org.apache.tapestry5.*;
+import org.apache.tapestry5.hibernate.HibernateConfigurer;
+import org.apache.tapestry5.hibernate.HibernateSymbols;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Local;
+import org.apache.tapestry5.ioc.annotations.Startup;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestHandler;
 import org.apache.tapestry5.services.Response;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This module is automatically included as part of the Tapestry IoC Registry, it's a good place to
@@ -21,10 +28,14 @@ import org.slf4j.Logger;
  */
 public class AppModule
 {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(AppModule.class);
+
     public static void bind(ServiceBinder binder)
     {
         binder.bind(GeoDatabaseReader.class);
         binder.bind(LocationService.class);
+        binder.bind(WebRefresher.class);
         // binder.bind(MyServiceInterface.class, MyServiceImpl.class);
 
         // Make bind() calls on the binder object to define most IoC services.
@@ -43,6 +54,7 @@ public class AppModule
         // (a random hexadecimal number), but may be further overriden by DevelopmentModule or
         // QaModule.
         configuration.override(SymbolConstants.APPLICATION_VERSION, "0.5-SNAPSHOT");
+        configuration.override(HibernateSymbols.DEFAULT_CONFIGURATION, false);
     }
 
     public static void contributeApplicationDefaults(
@@ -117,5 +129,29 @@ public class AppModule
         // within the pipeline.
 
         configuration.add("Timing", filter);
+    }
+
+    @Startup
+    public static void scheduleJobs(
+            final WebRefresher webRefresher) {
+        List<String> webUrls = new ArrayList<>();
+        webUrls.add("http://www.wwps.ca");
+        webUrls.add("http://www.digimax.com");
+        webUrls.add("http://embrace.humanity.cc");
+        webUrls.add("http://this.ncapsuld.info");
+        webUrls.add("http://portfolio.h2o-elements.com");
+        webUrls.add("http://ianrawlinson-portfolio.appspot.com");
+        webRefresher.spawnRefresher(webUrls);
+        LOGGER.debug("Web Refresher finished spawning");
+    }
+
+    public void contributeHibernateSessionSource(
+            OrderedConfiguration<HibernateConfigurer> configurer) {
+
+        configurer.add("hibernate-session-source", new HibernateConfigurer() {
+            public void configure(org.hibernate.cfg.Configuration configuration) {
+                configuration.configure("dev.hibernate.cfg.xml");
+            }
+        });
     }
 }

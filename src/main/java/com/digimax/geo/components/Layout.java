@@ -42,10 +42,13 @@ public class Layout
     @Inject
     private ComponentResources resources;
 
-    @Property
+    @Property(read = false)
     @Inject
-    @Symbol(SymbolConstants.APPLICATION_VERSION)
+    @Symbol(SymbolConstants.APPLICATION_VERSION) //@TODO figure this out
     private String appVersion;
+    public String getAppVersion() {
+        return "0.5-SNAPSHOT";
+    }
 
 
     public String getClassForPageName()
@@ -59,6 +62,4 @@ public class Layout
     {
         return new String[]{"Index", "About", "Contact"};
     }
-
-
 }

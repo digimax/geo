@@ -5,6 +5,8 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.beaneditor.NonVisual;
 
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -13,8 +15,9 @@ import java.io.IOException;
 /**
  * Created by jon on 1/22/2014.
  */
-@Entity
+//@Entity
 @XmlRootElement(name = "location")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Location extends DomainObject {
 
     @Property

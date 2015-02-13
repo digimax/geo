@@ -9,7 +9,7 @@ import javax.persistence.*;
 /**
  * Created by jonwilliams on 2014-05-16.
  */
-@Entity
+//@Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User extends DomainObject {
 

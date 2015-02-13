@@ -7,4 +7,5 @@
     <system-properties>
         <property name="java.io.tmpdir" value="images/"/>
     </system-properties>
+    <use-google-connector-j>true</use-google-connector-j>
 </appengine-web-app>

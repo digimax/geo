@@ -8,7 +8,7 @@ sourceCompatibility = "1.5"
 targetCompatibility = "1.5"
 
 group = "com.digimax"
-version = "1.0-SNAPSHOT"
+version = "0.5-SNAPSHOT"
 
 repositories {
     mavenCentral()

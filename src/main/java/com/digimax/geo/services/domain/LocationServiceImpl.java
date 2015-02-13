@@ -3,14 +3,12 @@ package com.digimax.geo.services.domain;
 import com.digimax.geo.entities.Location;
 import com.digimax.geo.services.app.GeoDatabaseReader;
 import com.digimax.geo.structural.IpAddressValidator;
-import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.slf4j.Logger;
 import org.xbill.DNS.*;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -77,7 +75,14 @@ public class LocationServiceImpl implements LocationService {
     }
 
     private String getIsp(String ipAddress) throws IOException {
-        String location = reverseDnsLookup(ipAddress);
+        String devModeString = System.getProperty("dev.mode", "true");
+        boolean devMode = devModeString.equals("true");
+        String location;
+        if (devMode) {
+            location = null;//resolveHostName(ipAddress);
+        } else {
+            location = reverseDnsLookup(ipAddress);
+        }
         location = (location!=null && location.contains("."))
                 ? location.substring(location.indexOf('.'))
                 : "";
@@ -105,4 +110,18 @@ public class LocationServiceImpl implements LocationService {
             return answers[0].rdataToString();
     }
 
+    private String resolveHostName(final String ip) throws UnknownHostException {
+        final byte[] byteArray = new byte[4];
+        final String[] stringArray = ip.split("\\.");
+        if (stringArray.length == 4) {
+            for (int count=0; count<4; count++) {
+                String num = stringArray[count];
+                Integer integer = Integer.parseInt(num);
+//                logger.debug("num :: {}, ({})", num, integer);
+                byteArray[count] = integer.byteValue();
+            }
+        }
+        InetAddress inetAddress = InetAddress.getByAddress(byteArray);
+        return inetAddress.getCanonicalHostName();
+    }
 }

@@ -5,27 +5,29 @@
 <hibernate-configuration>
     <session-factory>
         <property name="connection.driver_class">
-            org.hsqldb.jdbcDriver
+            com.mysql.jdbc.GoogleDriver
         </property>
-        <!--<property name="connection.url">-->
-        <!--jdbc:hsqldb:mem:test-->
-        <!--</property>-->
         <property name="connection.url">
-            jdbc:hsqldb:file:/dig/wrk/digimaxComOpenSource/apps/geo/db/geo;shutdown=true;create=true;hsqldb.sqllog=3
+            <!--jdbc:hsqldb:file:/dig/wrk/digimaxComOpenSource/apps/geo/db/geo;shutdown=true;create=true;hsqldb.sqllog=3-->
+            jdbc:google:mysql://digimaxgeo:geo/public?user=root
        </property>
-        <property name="connection.username">sa</property>
-        <property name="dialect">
-            org.hibernate.dialect.HSQLDialect
-        </property>
-        <property name="current_session_context_class">
-            thread
-        </property>
-        <property name="cache.provider_class">
-            org.hibernate.cache.NoCacheProvider
-        </property>
-        <property name="show_sql">true</property>
-        <property name="format_sql">true</property>
-        <property name="hbm2ddl.auto">update</property>
-        <property name="hibernate.generate_statistics">true</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+
+        <!--<property name="connection.password">t00T13</property>-->
+        <!--<property name="connection.username">sa</property>-->
+        <!--<property name="dialect">-->
+            <!--org.hibernate.dialect.HSQLDialect-->
+        <!--</property>-->
+        <!--<property name="current_session_context_class">-->
+            <!--thread-->
+        <!--</property>-->
+        <!--<property name="cache.provider_class">-->
+            <!--org.hibernate.cache.NoCacheProvider-->
+        <!--</property>-->
+        <!--<property name="show_sql">true</property>-->
+        <!--<property name="format_sql">true</property>-->
+        <!--<property name="hbm2ddl.auto">update</property>-->
+        <!--<property name="hibernate.generate_statistics">true</property>-->
     </session-factory>
 </hibernate-configuration>
